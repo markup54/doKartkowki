@@ -58,3 +58,78 @@ else
 {
     Console.WriteLine("bliżej " + dolnaLiczbaFib);
 }
+
+//na cel wyszukiwanie binarne
+
+//kolejna wersja na kartkówkę
+
+//wylosuj 30 liczb z zakresu <50 do 100> do listy 
+Random random = new Random();
+List<int> listaLiczbWylosowanych = new List<int>();
+for (int i = 0; i < 30; i++)
+{
+    listaLiczbWylosowanych.Add(random.Next(50,101));
+}
+
+//wypisz liczby wylosowane
+Console.WriteLine("liczby wylosowane:");
+for (int i = 0;i < 30; i++)
+{
+    Console.Write(listaLiczbWylosowanych[i]+" ** ");
+}
+
+
+//wypisz liczby wylosowane bez powtórzeń
+
+HashSet<int> zbiorLiczbWylosowanych = 
+    new HashSet<int>(listaLiczbWylosowanych);
+Console.WriteLine();
+Console.WriteLine("liczby wylosowane bez powtórzeń :");
+foreach (int wartosc in zbiorLiczbWylosowanych)
+{
+    Console.Write(wartosc+" -- ");
+}
+
+//inaczej
+HashSet<int> zbior2 = new HashSet<int>();
+for (int i = 0; i < 30; i++)
+{
+    zbior2.Add(listaLiczbWylosowanych[i]);
+}
+
+//znajdz liczbę która została wylosowana najczęściej
+
+int maksymalnewystapienie = 0;
+List<int> maksymalne = new List<int>();
+foreach(int wartosc in zbior2)
+{
+    if(maksymalnewystapienie == policz(wartosc, listaLiczbWylosowanych))
+    {
+        maksymalne.Add(wartosc);
+    }
+    else
+    if (maksymalnewystapienie < policz(wartosc, listaLiczbWylosowanych))
+    {
+        maksymalnewystapienie = policz(wartosc, listaLiczbWylosowanych);
+        maksymalne = new List<int>();
+        maksymalne.Add(wartosc);
+    }
+   
+        Console.WriteLine(wartosc + " " + policz(wartosc, listaLiczbWylosowanych));
+}
+
+//oblicz średnią wylosowanych liczb
+
+int policz(int wartosc , List<int> lista)
+{
+    int ile = 0;
+    for (int i = 0; i < lista.Count; i++)
+    {
+        if(wartosc == lista[i])
+        {
+            ile++;
+        }
+    }
+    return ile;
+
+}
